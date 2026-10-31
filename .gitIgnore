@@ -1,0 +1,40 @@
+# ==========================================
+# .NET 8 (Backend)
+# ==========================================
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.publishState
+
+# ==========================================
+# Angular / Node.js (Frontend)
+# ==========================================
+node_modules/
+dist/
+.angular/
+.npm/
+.yarn-integrity
+.pnp.*
+
+# ==========================================
+# Entornos, Secretos y Logs
+# ==========================================
+.env
+.env.local
+*.log
+logs/
+
+# ==========================================
+# IDEs y Sistemas Operativos
+# ==========================================
+.vscode/
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
