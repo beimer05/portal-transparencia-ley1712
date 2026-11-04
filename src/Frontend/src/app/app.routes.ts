@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ContratacionComponent } from './pages/contratacion/contratacion.component';
 import { PresupuestoComponent } from './pages/presupuesto/presupuesto.component';
 import { NormativaComponent } from './pages/normativa/normativa.component';
+import { FuncionariosComponent } from './pages/funcionario/funcionario.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -10,5 +11,6 @@ export const routes: Routes = [
   { path: 'contratacion', component: ContratacionComponent },
   { path: 'presupuesto', component: PresupuestoComponent },
   { path: 'normativa', component: NormativaComponent },
+  { path: 'funcionarios', component: FuncionariosComponent },
   { path: '**', redirectTo: '' }
 ];
