@@ -1,9 +1,11 @@
 export interface Normativa {
   id: number;
-  titulo: string;
+  tipoNorma: string;
+  numeroNorma: string;
+  anio: number;
   descripcion: string;
-  tipo: string; // Ej: 'Ley', 'Decreto', 'Resolución'
-  numero: string;
+  enlaceDocumento: string;
+  // Propiedades auxiliares para la vista del Home
   fechaPublicacion: string;
-  urlDocumento: string;
+  titulo: string;
 }

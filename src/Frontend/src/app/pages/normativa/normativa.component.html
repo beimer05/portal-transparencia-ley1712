@@ -1,0 +1,50 @@
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="bg-white shadow-md rounded-lg overflow-hidden border border-slate-200">
+    <!-- Encabezado de la Sección -->
+    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+      <div>
+        <h2 class="text-xl font-bold">Normativa e Información Legal</h2>
+        <p class="text-xs text-slate-400 mt-1">Ley 1712 de 2014 - Marco Jurídico Institucional</p>
+      </div>
+      <span class="bg-blue-600 text-xs px-3 py-1 rounded-full font-semibold">Marco Legal</span>
+    </div>
+
+    <!-- Contenido / Tabla -->
+    <div class="overflow-x-auto p-6">
+      @if (cargando()) {
+        <div class="text-center py-10 text-slate-500 font-medium">Cargando marco normativo...</div>
+      } @else {
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider border-b border-slate-200">
+              <th class="py-3 px-4 font-semibold">Tipo</th>
+              <th class="py-3 px-4 font-semibold">Número</th>
+              <th class="py-3 px-4 font-semibold text-center">Año</th>
+              <th class="py-3 px-4 font-semibold">Descripción</th>
+              <th class="py-3 px-4 font-semibold text-center">Enlace</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-sm text-slate-700">
+            @for (item of normativas(); track item.id) {
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3 px-4 font-medium text-slate-900">
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded-md">{{ item.tipoNorma }}</span>
+                </td>
+                <td class="py-3 px-4 font-bold text-slate-900">{{ item.numeroNorma }}</td>
+                <td class="py-3 px-4 text-center">{{ item.anio }}</td>
+                <td class="py-3 px-4 text-slate-600">{{ item.descripcion }}</td>
+                <td class="py-3 px-4 text-center">
+                  <a [href]="item.enlaceDocumento" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium text-xs underline">Consultar</a>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="text-center py-6 text-slate-400">No hay registros de normativa disponibles.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  </div>
+</div>
