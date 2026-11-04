@@ -1,0 +1,43 @@
+<div class="space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold text-slate-900">Sección de Contratación</h2>
+    <p class="text-sm text-slate-500">Procesos contractuales y adjudicaciones públicas (Ley 1712).</p>
+  </div>
+
+  @if (cargando()) {
+    <p class="text-slate-500 text-sm">Cargando procesos de contratación...</p>
+  } @else {
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-slate-50 text-slate-700 text-xs uppercase font-semibold">
+          <tr>
+            <th class="p-4">Nro. Contrato</th>
+            <th class="p-4">Objeto</th>
+            <th class="p-4">Contratista</th>
+            <th class="p-4">Valor</th>
+            <th class="p-4">Fecha</th>
+            <th class="p-4 text-center">Documento</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-sm text-slate-600">
+          @for (item of contratos(); track item.id) {
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-medium text-slate-900">{{ item.numeroContrato }}</td>
+              <td class="p-4">{{ item.objeto }}</td>
+              <td class="p-4">{{ item.contratista }}</td>
+              <td class="p-4 font-semibold text-slate-800">{{ item.valor | currency:'COP':'symbol':'1.0-0' }}</td>
+              <td class="p-4">{{ item.fechaAdjudicacion | date:'yyyy-MM-dd' }}</td>
+              <td class="p-4 text-center">
+                <a [href]="item.urlDocumento" target="_blank" class="text-blue-600 hover:underline font-medium">Ver PDF</a>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="p-6 text-center text-slate-400">No hay procesos de contratación registrados.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
