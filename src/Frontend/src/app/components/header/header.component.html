@@ -1,4 +1,4 @@
-<header class="bg-slate-900 text-white shadow-md">
+<!--<header class="bg-slate-900 text-white shadow-md">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
     <div class="flex items-center space-x-3">
       <span class="bg-blue-600 text-white p-2 rounded-lg font-bold text-lg">PT</span>
@@ -17,6 +17,84 @@
   Talento Humano
 </a>
       <a routerLink="/contacto" class="hover:text-blue-400 transition-colors">Contacto</a>
+    </nav>
+  </div>
+</header>-->
+
+<header class="bg-slate-900 text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    
+    <!-- Logo y Título -->
+    <div class="flex items-center space-x-3">
+      <span class="bg-blue-600 text-white p-2 rounded-lg font-bold text-lg">PT</span>
+      <div>
+        <h1 class="font-bold text-lg tracking-wide">Portal de Transparencia</h1>
+        <p class="text-xs text-slate-400">Ley 1712 de 2014</p>
+      </div>
+    </div>
+
+    <!-- Navegación Principal -->
+    <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+      
+      <a routerLink="/" 
+         routerLinkActive="text-blue-400" 
+         [routerLinkActiveOptions]="{exact: true}" 
+         class="hover:text-blue-400 transition-colors">
+        Inicio
+      </a>
+
+      <!-- MENÚ DESPLEGABLE: Transparencia -->
+      <div class="relative" (mouseleave)="closeDropdown()">
+        <button (click)="toggleDropdown()" 
+                type="button" 
+                class="flex items-center space-x-1 hover:text-blue-400 transition-colors focus:outline-none py-2">
+          <span>Transparencia</span>
+          <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="isDropdownOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <!-- Submenú Flotante Adaptado a Slate-800 -->
+      @if (isDropdownOpen()) {
+  <div class="absolute left-0 top-full pt-1 w-60 z-50">
+    <div class="bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-2">
+      
+      <a routerLink="/normativa" 
+         (click)="closeDropdown()" 
+         routerLinkActive="text-blue-400 font-semibold bg-slate-700/50" 
+         class="block px-4 py-2 text-slate-200 hover:bg-slate-700 hover:text-blue-400 transition-colors">
+        Normativa e Información Legal
+      </a>
+
+      <a routerLink="/contratacion" 
+         (click)="closeDropdown()" 
+         routerLinkActive="text-blue-400 font-semibold bg-slate-700/50" 
+         class="block px-4 py-2 text-slate-200 hover:bg-slate-700 hover:text-blue-400 transition-colors">
+        Contratación
+      </a>
+
+      <a routerLink="/presupuesto" 
+         (click)="closeDropdown()" 
+         routerLinkActive="text-blue-400 font-semibold bg-slate-700/50" 
+         class="block px-4 py-2 text-slate-200 hover:bg-slate-700 hover:text-blue-400 transition-colors">
+        Presupuesto y Ejecución
+      </a>
+
+      <a routerLink="/funcionarios" 
+         (click)="closeDropdown()" 
+         routerLinkActive="text-blue-400 font-semibold bg-slate-700/50" 
+         class="block px-4 py-2 text-slate-200 hover:bg-slate-700 hover:text-blue-400 transition-colors">
+        Talento Humano (Directorio)
+      </a>
+
+    </div>
+  </div>
+}
+      </div>
+
+      <!-- Enlaces Externos/Futuros -->
+      <a routerLink="/contacto" routerLinkActive="text-blue-400" class="hover:text-blue-400 transition-colors">Contacto</a>
+
     </nav>
   </div>
 </header>
