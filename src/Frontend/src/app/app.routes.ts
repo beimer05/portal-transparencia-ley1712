@@ -4,6 +4,7 @@ import { ContratacionComponent } from './pages/contratacion/contratacion.compone
 import { PresupuestoComponent } from './pages/presupuesto/presupuesto.component';
 import { NormativaComponent } from './pages/normativa/normativa.component';
 import { FuncionariosComponent } from './pages/funcionario/funcionario.component';
+import { TramiteComponent } from './pages/tramite/tramite.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'presupuesto', component: PresupuestoComponent },
   { path: 'normativa', component: NormativaComponent },
   { path: 'funcionarios', component: FuncionariosComponent },
+  { path: 'tramites', component: TramiteComponent },
   { path: '**', redirectTo: '' }
 ];
