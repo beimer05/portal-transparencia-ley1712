@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
 using PortalTransparencia.Application.Interfaces;
+using PortalTransparencia.Infrastructure.Persistence;
 using PortalTransparencia.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 1. Configurar SQLite con EF Core
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 1. Agregar controladores y Swagger / OpenAPI
 builder.Services.AddControllers();
@@ -35,6 +41,13 @@ var app = builder.Build();
 //     // Elimina o comenta esta línea:
 //     // app.MapOpenApi();
 // }
+
+// Aplicar migraciones automáticas al iniciar (ideal para entornos cloud gratuitos)
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.EnsureCreated(); // Crea el archivo SQLite y tablas si no existen
+}
 
 app.UseHttpsRedirection();
 

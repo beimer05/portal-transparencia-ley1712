@@ -1,27 +1,34 @@
 using PortalTransparencia.Application.Interfaces;
 using PortalTransparencia.Domain.Entities;
-using System.Collections.Concurrent;
+using PortalTransparencia.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace PortalTransparencia.Infrastructure.Repositories
 {
-    public class PqrsdfRepository : IPqrsdfRepository
+ public class PqrsdfRepository : IPqrsdfRepository
     {
-        // Almacén temporal en memoria hasta conectar SQL Server con EF Core
-        private static readonly ConcurrentDictionary<string, Pqrsdf> _storage = new();
+        private readonly ApplicationDbContext _context;
+
+        public PqrsdfRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<Pqrsdf> CrearAsync(Pqrsdf pqrsdf)
         {
-            pqrsdf.Radicado = $"PQRS-{DateTime.UtcNow.Year}-{(_storage.Count + 1).ToString("D3")}";
+            int totalRegistros = await _context.Pqrsdfs.CountAsync() + 1;
+            pqrsdf.Radicado = $"PQRS-{DateTime.UtcNow.Year}-{totalRegistros.ToString("D3")}";
             pqrsdf.FechaRadicacion = DateTime.UtcNow;
-            
-            _storage[pqrsdf.Radicado] = pqrsdf;
-            return await Task.FromResult(pqrsdf);
+
+            _context.Pqrsdfs.Add(pqrsdf);
+            await _context.SaveChangesAsync();
+            return pqrsdf;
         }
 
         public async Task<Pqrsdf?> ObtenerPorRadicadoAsync(string radicado)
         {
-            _storage.TryGetValue(radicado, out var pqrsdf);
-            return await Task.FromResult(pqrsdf);
+            return await _context.Pqrsdfs
+                .FirstOrDefaultAsync(p => p.Radicado == radicado);
         }
     }
 }
